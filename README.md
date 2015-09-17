@@ -13,3 +13,7 @@ This is my vim distribution. It is inspirated in [janus](https://github.com/carl
 ### Update
 
 ### Mappings
+
+Leader key is mapped to ```,```
+
+Pastetoggle is maped to ```<F10>```

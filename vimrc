@@ -32,6 +32,10 @@ colorscheme jellybeans " colorschemes in .vim/bundle/vim-colorscheme
 "" General key maps
 ""------------------------------------------------------------
 
+let mapleader = ',' " map leader to ,
+
+set pastetoggle=<F10> " Toggle paste mode with f10
+
 ""------------------------------------------------------------
 "" Plugin - CtrlP
 ""------------------------------------------------------------
