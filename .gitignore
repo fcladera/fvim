@@ -1,2 +1,5 @@
 # Ignore vim swp files
 *.swp
+
+# Ignore spell folder
+spell
