@@ -8,13 +8,77 @@
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
-filetype plugin indent on
 
 ""------------------------------------------------------------
 "" Basic configurations
 ""------------------------------------------------------------
 
-set nocompatible " use vim instead of vi
+set nocompatible  " Use vim instead of vi
+
+if has('autocmd')
+  filetype plugin indent on "File type detection and language-dependent indenting
+endif
+
+if has('syntax')
+  syntax enable "Switches on syntax highlighting
+endif
+
+set backspace=indent,eol,start  " Backspace delete over line breaks
+
+set autoindent  " Copy indent from current line when starting a new line
+set smartindent " Do smart autoindenting when starting a new line
+
+set ignorecase  " Ignore case in search patterns
+set smartcase   " Unless upercase found
+
+set complete-=i " Completion from include files disabled
+set smarttab    " <Tab> in front of a line inserts blanks according to 'shiftwidth'
+
+set nrformats-=octal " Avoid numbers as 007 to be read as octal numbers
+
+set ttimeout         " Set a timeout for operator-pending mode
+set ttimeoutlen=150  " Timeout value in ms
+
+set wildmenu      " Command-line completion operates in an enhanced mode
+set laststatus=2  " Always show a status line
+set ruler         "Show the line and column number of the cursor position
+set showcmd       "Show (partial) command in the last line of the screen
+
+set scrolloff=1 " Set number of lines above and below the cursor
+
+set display+=lastline " As much as possible of the last line in a window
+                      " will be displayed instead of @ (char in
+                      " listchars)
+
+if has('gui_running')
+  set encoding=utf-8  " Character encoding used inside Vim
+endif
+
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j  " Delete comment character when joining commented lines
+endif
+
+if has('path_extra')
+  setglobal tags-=./tags tags-=./tags; tags^=./tags;  " Try to find tags file recursively
+endif
+
+set autoread  " Automatically reload files changed outside vim
+
+set history=1000  " Set a long command history
+
+set hidden  " Allow buffer switching without saving
+
+if !empty(&viminfo)
+  set viminfo^=!  " Don't override a blank viminfo
+endif
+
+set splitbelow " Split in a "more natural" way
+set splitright
+
+set incsearch " Show where the pattern matches while typing a search command
+set hlsearch  " Highlight matches
+
+set showmatch " Match brackets briefly
 
 ""------------------------------------------------------------
 "" Appareance
