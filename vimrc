@@ -84,13 +84,19 @@ set showmatch " Match brackets briefly
 "" Appareance
 ""------------------------------------------------------------
 
+set t_Co=256 " Enable 256 colors in vim
+
 if has("gui_running")
-  "set guioptions=r
-  set guifont=DejaVu\ Sans\ Mono\ 16
+  set guifont=DejaVu\ Sans\ Mono\ 16  " Set gui font
 endif
 
 set background=dark
 colorscheme jellybeans " colorschemes in .vim/bundle/vim-colorscheme
+
+set list " List mode: shows spaces, tabs and nbsp in text with special characters
+set listchars=tab:›\ ,trail:•,nbsp:+   "List mode configuration
+
+set cursorline " Highlight current line
 
 ""------------------------------------------------------------
 "" General key maps
