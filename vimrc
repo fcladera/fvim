@@ -107,5 +107,12 @@ let mapleader = ',' " map leader to ,
 set pastetoggle=<F10> " Toggle paste mode with f10
 
 ""------------------------------------------------------------
-"" Plugin - CtrlP
+"" Plugin - Ack.vim
+""------------------------------------------------------------
+
+" Use ag instead of ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 ""------------------------------------------------------------
