@@ -106,6 +106,25 @@ let mapleader = ',' " map leader to ,
 
 set pastetoggle=<F10> " Toggle paste mode with f10
 
+nmap <silent> <leader>W :call StripTrailingWhitespace()<CR>
+
+""------------------------------------------------------------
+"" Functions
+""------------------------------------------------------------
+
+"" Clear trailing whitespaces from spf13
+function! StripTrailingWhitespace()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " do the business:
+  %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
 ""------------------------------------------------------------
 "" Plugin - Ack.vim
 ""------------------------------------------------------------

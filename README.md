@@ -38,3 +38,5 @@ and tune it, it provides a good starting point!
 Leader key is mapped to ```,```
 
 Pastetoggle is maped to ```<F10>```
+
+Clear trailing whitespaces with ```<leader>W```
