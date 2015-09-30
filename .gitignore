@@ -3,3 +3,9 @@
 
 # Ignore spell folder
 spell
+
+# Ignore plug.vim in autoload folder
+autoload/plug.vim
+
+# Ignore plug.vim folder where plugins are keep
+plugged

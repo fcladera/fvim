@@ -3,12 +3,17 @@
 ""------------------------------------------------------------
 
 ""------------------------------------------------------------
-"" Loading Pathogen plugins
+"" Load plugins with plug.vim
 ""------------------------------------------------------------
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
+call plug#begin()
+Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+Plug 'easymotion/vim-easymotion'
+Plug 'flazz/vim-colorschemes'
+Plug 'mileszs/ack.vim'
+call plug#end()
 ""------------------------------------------------------------
 "" Basic configurations
 ""------------------------------------------------------------
