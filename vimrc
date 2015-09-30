@@ -13,6 +13,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-repeat'
 call plug#end()
 ""------------------------------------------------------------
 "" Basic configurations
