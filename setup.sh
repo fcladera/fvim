@@ -2,7 +2,9 @@
 
 function install {
     rm -f ~/.vimrc
-    ln -s  .vim/vimrc ~/.vimrc
+    # Download vim.plug
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
 install
