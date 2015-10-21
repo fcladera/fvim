@@ -118,6 +118,8 @@ nmap <silent> <leader>/ :nohlsearch<CR> " Clear search highlight
 
 nmap <silent> <leader>W :call StripTrailingWhitespace()<CR>
 
+nmap <silent> <leader>F :call UpdateFvim()<CR>
+
 nmap <silent> <leader>= :OnlineThesaurusCurrentWord<CR>
 
 ""------------------------------------------------------------
@@ -135,6 +137,15 @@ function! StripTrailingWhitespace()
   " clean up: restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
+endfunction
+
+"" Update fivm
+function! UpdateFvim()
+  PlugUpdate
+  sleep 1
+  PlugClean!
+  sleep 1
+  bd
 endfunction
 
 ""------------------------------------------------------------
