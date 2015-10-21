@@ -14,7 +14,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-repeat'
-Plug 'gcmt/wildfire.vim'
 Plug 'scrooloose/syntastic'
 call plug#end()
 ""------------------------------------------------------------
