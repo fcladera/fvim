@@ -33,6 +33,8 @@ endif
 
 set backspace=indent,eol,start  " Backspace delete over line breaks
 
+set fileformats=unix,dos        " Prefer Unix based file format, only LF at end line
+
 set autoindent  " Copy indent from current line when starting a new line
 set smartindent " Do smart autoindenting when starting a new line
 
