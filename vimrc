@@ -15,6 +15,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/syntastic'
+Plug 'beloglazov/vim-online-thesaurus'
 call plug#end()
 ""------------------------------------------------------------
 "" Basic configurations
@@ -116,6 +117,8 @@ set pastetoggle=<F10> " Toggle paste mode with f10
 nmap <silent> <leader>/ :nohlsearch<CR> " Clear search highlight
 
 nmap <silent> <leader>W :call StripTrailingWhitespace()<CR>
+
+nmap <silent> <leader>= :OnlineThesaurusCurrentWord<CR>
 
 ""------------------------------------------------------------
 "" Functions
