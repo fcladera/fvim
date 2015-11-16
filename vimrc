@@ -124,6 +124,24 @@ nmap <silent> <leader>F :call UpdateFvim()<CR>
 
 nmap <silent> <leader>= :OnlineThesaurusCurrentWord<CR>
 
+" New vertical window
+nmap <F2> :vnew<CR>:e 
+
+" New horizontal window
+nmap <F3> :new<CR>:e 
+
+" Parcourir les windows
+nmap <Space> <C-W>w
+
+" New tab
+nmap <F6> :tabe<CR>:e 
+
+" Previous tab
+nmap <silent> <F7> :tabp<CR>
+
+" Next tab
+nmap <silent> <F8> :tabn<CR>
+
 ""------------------------------------------------------------
 "" Functions
 ""------------------------------------------------------------
