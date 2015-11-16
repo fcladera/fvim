@@ -28,6 +28,11 @@ and tune it, it provides a good starting point!
     ```
     ~/.vim/setup.sh
     ```
+4. Execute ```vim``` and update plugins inside **vim**.
+
+    ```
+    :PlugInstall
+    ```
 
 ## Update
 
