@@ -116,7 +116,8 @@ let mapleader = ',' " map leader to ,
 
 set pastetoggle=<F10> " Toggle paste mode with f10
 
-nmap <silent> <leader>/ :nohlsearch<CR> " Clear search highlight
+" Clear search highlight
+nmap <silent> <leader>/ :nohlsearch<CR>
 
 nmap <silent> <leader>W :call StripTrailingWhitespace()<CR>
 
