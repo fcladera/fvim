@@ -16,6 +16,8 @@ Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/syntastic'
 Plug 'beloglazov/vim-online-thesaurus'
+Plug 'elzr/vim-json'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 ""------------------------------------------------------------
 "" Basic configurations
@@ -177,5 +179,15 @@ endfunction
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+""------------------------------------------------------------
+"" Language specific: Javascript
+""------------------------------------------------------------
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
+
+""------------------------------------------------------------
+"" Language specific: JSON
+""------------------------------------------------------------
+autocmd FileType json setlocal shiftwidth=2 tabstop=2 expandtab
 
 ""------------------------------------------------------------
