@@ -191,3 +191,8 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType json setlocal shiftwidth=2 tabstop=2 expandtab
 
 ""------------------------------------------------------------
+"" Language specific: HTML
+""------------------------------------------------------------
+autocmd FileType html setlocal shiftwidth=4 tabstop=4 expandtab
+
+""------------------------------------------------------------
