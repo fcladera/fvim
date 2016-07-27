@@ -183,16 +183,31 @@ endif
 ""------------------------------------------------------------
 "" Language specific: Javascript
 ""------------------------------------------------------------
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 expandtab
 
 ""------------------------------------------------------------
 "" Language specific: JSON
 ""------------------------------------------------------------
-autocmd FileType json setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType json setlocal shiftwidth=4 tabstop=4 expandtab
+
+""------------------------------------------------------------
+"" Language specific: SHELL SCRIPT
+""------------------------------------------------------------
+autocmd FileType sh setlocal shiftwidth=4 tabstop=4 expandtab
 
 ""------------------------------------------------------------
 "" Language specific: HTML
 ""------------------------------------------------------------
-autocmd FileType html setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 expandtab
 
+""------------------------------------------------------------
+"" Language specific: yaml
+""------------------------------------------------------------
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 expandtab
+""------------------------------------------------------------
+
+""------------------------------------------------------------
+"" Language specific: makefile
+""------------------------------------------------------------
+autocmd FileType make setlocal shiftwidth=4 tabstop=4 noexpandtab
 ""------------------------------------------------------------
