@@ -70,7 +70,7 @@ set smarttab    " <Tab> in front of a line inserts blanks according to 'shiftwid
 set nrformats-=octal " Avoid numbers as 007 to be read as octal numbers
 
 set ttimeout         " Set a timeout for operator-pending mode
-set ttimeoutlen=150  " Timeout value in ms
+set ttimeoutlen=0          " Timeout for escape sequences
 
 set wildmenu      " Command-line completion operates in an enhanced mode
 set laststatus=2  " Always show a status line
@@ -153,22 +153,22 @@ nmap <silent> <leader>F :call UpdateFvim()<CR>
 nmap <silent> <leader>= :OnlineThesaurusCurrentWord<CR>
 
 " Change between windows
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " New vertical window
-nmap <F2> :vnew<CR>:e 
+nmap <F2> :vnew<CR>:e
 
 " New horizontal window
-nmap <F3> :new<CR>:e 
+nmap <F3> :new<CR>:e
 
 " Parcourir les windows
 nmap <Space> <C-W>w
 
 " New tab
-nmap <F6> :tabe<CR>:e 
+nmap <F6> :tabe<CR>:e
 
 " Previous tab
 nmap <silent> <F7> :tabp<CR>
@@ -238,6 +238,11 @@ autocmd FileType sh setlocal shiftwidth=4 tabstop=4 expandtab
 "" Language specific: HTML
 ""------------------------------------------------------------
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 expandtab
+"
+""------------------------------------------------------------
+"" Language specific: tex
+""------------------------------------------------------------
+autocmd FileType tex setlocal shiftwidth=2 tabstop=2 expandtab
 
 ""------------------------------------------------------------
 "" Language specific: yaml
@@ -253,8 +258,20 @@ autocmd FileType make setlocal shiftwidth=4 tabstop=4 noexpandtab
 ""------------------------------------------------------------
 "" Language specific: email
 ""------------------------------------------------------------
-autocmd FileType make setlocal formatoptions+=w
+autocmd FileType mail setlocal formatoptions+=w
 
+""------------------------------------------------------------
+"" Language specific: python
+""------------------------------------------------------------
+autocmd FileType python setlocal
+      \ tabstop=4
+      \ softtabstop=4
+      \ shiftwidth=4
+      \ textwidth=79
+      \ expandtab
+      \ autoindent
+      \ fileformat=unix
+"
 ""------------------------------------------------------------
 "" Plugin - NERDTree
 ""------------------------------------------------------------
@@ -289,8 +306,8 @@ set ttyfast
 " Global %s by default
 set gdefault
 
-" Set spanish as default language
-set spelllang=es
+" Set english as default language
+set spelllang=en
 
 "===============================================================================
 " ==== Maps ===
@@ -325,6 +342,14 @@ vmap <Leader>P "+P
 " Activate spell check with ,s
 map <leader>s :set spell<CR>
 
+" Delete file in current buffer but do not close tab or view
+command Bd bp\|bd \#
+
+" Exit terminal with esc
+tnoremap <Esc> <C-\><C-n>
+
+
+
 "===============================================================================
 " ==== Functions  ===
 
@@ -356,10 +381,6 @@ autocmd! BufWritePost * Neomake
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " autocmd vimenter * NERDTree
-
-"-------------------------------------------------------------------------------
-" Latex live preview
-let g:livepreview_previewer = 'okular'
 
 "===============================================================================
 " === Sources ===
