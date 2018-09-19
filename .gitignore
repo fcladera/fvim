@@ -9,3 +9,5 @@ autoload/plug.vim
 
 # Ignore plug.vim folder where plugins are keep
 plugged
+
+.netrwhist
