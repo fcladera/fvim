@@ -5,22 +5,31 @@
 ""------------------------------------------------------------
 "" Load plugins with plug.vim
 ""------------------------------------------------------------
+"function! DoRemote(arg)
+"  UpdateRemotePlugins
+"endfunction
 
 call plug#begin()
 Plug 'tpope/vim-surround'
+" Show Git modifications in vim
 Plug 'mhinz/vim-signify'
+" Git vim wrapper
 Plug 'tpope/vim-fugitive'
 Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-repeat'
 Plug 'neomake/neomake'
-"Plug 'takac/vim-hardtime'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'reedes/vim-wordy'
 Plug 'vivien/vim-linux-coding-style'
+Plug 'rhysd/vim-grammarous'
+" Better use of Vim with tex files
+Plug 'https://github.com/lervag/vimtex'
+" Use vim in browser, useful for sharelatex
+Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 "Stuff for snippets
 "Plug 'MarcWeber/vim-addon-mw-utils'
 "Plug 'tomtom/tlib_vim'
