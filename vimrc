@@ -28,6 +28,7 @@ Plug 'vivien/vim-linux-coding-style'
 Plug 'rhysd/vim-grammarous'
 " Better use of Vim with tex files
 Plug 'https://github.com/lervag/vimtex'
+Plug 'vim-scripts/loremipsum'
 " Use vim in browser, useful for sharelatex
 Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 "Stuff for snippets
@@ -38,7 +39,12 @@ Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 "Stuff for tab completion
 "Plug 'ervandew/supertab'
 "Stuff for autocompletion
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+" Go development
+Plug 'fatih/vim-go'
+" Pug (Jade) development
+Plug 'digitaltoad/vim-pug'
 call plug#end()
 ""------------------------------------------------------------
 "" Basic configurations
@@ -220,9 +226,21 @@ if executable('ag')
 endif
 
 ""------------------------------------------------------------
+"" Language specific: VHDL
+""------------------------------------------------------------
+autocmd FileType vhd setlocal shiftwidth=4 tabstop=4 noexpandtab
+""------------------------------------------------------------
+
+""------------------------------------------------------------
 "" Language specific: Javascript
 ""------------------------------------------------------------
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 expandtab
+
+"------------------------------------------------------------
+"" Language specific: Pug
+""------------------------------------------------------------
+autocmd FileType pug setlocal shiftwidth=2 tabstop=2 expandtab
+""------------------------------------------------------------
 
 ""------------------------------------------------------------
 "" Language specific: JSON
@@ -327,6 +345,19 @@ inoremap <right> <nop>
 
 " Select text pasted
 nnoremap <leader>v V`]
+
+" Search the visual selection
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+
+" Highlight these by default in Go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+
+" Best guess jump for YCM
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " Save file
 nnoremap <Leader>w :w<CR>

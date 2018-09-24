@@ -11,7 +11,7 @@ and tune it, it provides a good starting point!
 
 ## Install
 
-1. Backup your existing vim configuration files (if wanted) and remove
+1. Backup your existing vim and neovim configuration files (if wanted) and remove
    your old .vim folder.
 
     ```
