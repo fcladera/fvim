@@ -27,10 +27,15 @@ Plug 'reedes/vim-wordy'
 Plug 'vivien/vim-linux-coding-style'
 Plug 'rhysd/vim-grammarous'
 " Better use of Vim with tex files
-Plug 'https://github.com/lervag/vimtex'
+Plug 'lervag/vimtex'
 Plug 'vim-scripts/loremipsum'
 " Use vim in browser, useful for sharelatex
 Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
+" An awesome fuzzy finder
+Plug '/usr/share/fzf'
+Plug 'junegunn/fzf.vim'
+" Asynchronous linting
+Plug 'w0rp/ale'
 "Stuff for snippets
 "Plug 'MarcWeber/vim-addon-mw-utils'
 "Plug 'tomtom/tlib_vim'
@@ -46,6 +51,7 @@ Plug 'fatih/vim-go'
 " Pug (Jade) development
 Plug 'digitaltoad/vim-pug'
 call plug#end()
+
 ""------------------------------------------------------------
 "" Basic configurations
 ""------------------------------------------------------------
@@ -121,6 +127,39 @@ set incsearch " Show where the pattern matches while typing a search command
 set hlsearch  " Highlight matches
 
 set showmatch " Match brackets briefly
+"
+" Avoid modelines exploits
+set modelines=0
+
+" Use relative line numbers by default
+set relativenumber
+
+" Static word wrap
+"set formatoptions+=cqt
+set textwidth=72
+set linebreak
+
+" Indent behaviour
+
+" Tabs are 4 spaces but don't expand tabs
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab " Web programming
+" set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+" set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab " Linux kernel
+
+" Hide buffer instead of closing it. Avoid to save the file when :e is called
+set hidden
+
+" Flash instead of beep
+set visualbell
+
+" Fast mode in tty
+set ttyfast
+
+" Global %s by default
+set gdefault
+
+" Set english as default language
+set spelllang=en
 
 ""------------------------------------------------------------
 "" Ctags
@@ -216,14 +255,16 @@ function! UpdateFvim()
   bd
 endfunction
 
-""------------------------------------------------------------
-"" Plugin - Ack.vim
-""------------------------------------------------------------
-
-" Use ag instead of ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+" Blink the matching line
+nnoremap <silent> n n:call HLNext(0.4)<cr>
+nnoremap <silent> N N:call HLNext(0.4)<cr>
+function! HLNext (blinktime)
+	set invcursorline
+	redraw
+	exec 'sleep ' . float2nr(a:blinktime * 500) . 'm'
+	set invcursorline
+	redraw
+endfunction
 
 ""------------------------------------------------------------
 "" Language specific: VHDL
@@ -289,43 +330,6 @@ autocmd FileType python setlocal
       \ expandtab
       \ autoindent
       \ fileformat=unix
-"
-""------------------------------------------------------------
-"" Plugin - NERDTree
-""------------------------------------------------------------
-
-" Avoid modelines exploits
-set modelines=0
-
-" Use relative line numbers by default
-set relativenumber
-
-" Static word wrap
-"set formatoptions+=cqt
-set textwidth=72
-set linebreak
-
-" Indent behaviour
-
-" Tabs are 4 spaces but don't expand tabs
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab " Web programming
-" set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
-" set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab " Linux kernel
-
-" Hide buffer instead of closing it. Avoid to save the file when :e is called
-set hidden
-
-" Flash instead of beep
-set visualbell
-
-" Fast mode in tty
-set ttyfast
-
-" Global %s by default
-set gdefault
-
-" Set english as default language
-set spelllang=en
 
 "===============================================================================
 " ==== Maps ===
@@ -379,23 +383,6 @@ command Bd bp\|bd \#
 " Exit terminal with esc
 tnoremap <Esc> <C-\><C-n>
 
-
-
-"===============================================================================
-" ==== Functions  ===
-
-"-------------------------------------------------------------------------------
-" Blink the matching line
-nnoremap <silent> n n:call HLNext(0.4)<cr>
-nnoremap <silent> N N:call HLNext(0.4)<cr>
-function! HLNext (blinktime)
-	set invcursorline
-	redraw
-	exec 'sleep ' . float2nr(a:blinktime * 500) . 'm'
-	set invcursorline
-	redraw
-endfunction
-
 "===============================================================================
 " === Plugins ===
 
@@ -404,14 +391,23 @@ endfunction
 " run when a file is saved
 autocmd! BufWritePost * Neomake
 
-"-------------------------------------------------------------------------------
-" NERDTree
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+""------------------------------------------------------------
+"" Plugin - Ack.vim
+""------------------------------------------------------------
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Use ag instead of ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+nmap <C-P> :Ack
 
-" autocmd vimenter * NERDTree
+""------------------------------------------------------------
+"" Plugin - FZF
+""------------------------------------------------------------
+nmap ; :Buffers<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Tags<CR>
+" https://statico.github.io/vim3.html
 
 "===============================================================================
 " === Sources ===
