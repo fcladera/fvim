@@ -1,10 +1,6 @@
-""------------------------------------------------------------
-"" Configurations before loading plugins
-""------------------------------------------------------------
-
-""------------------------------------------------------------
-"" Load plugins with plug.vim
-""------------------------------------------------------------
+"===============================================================================
+" === Plugins ===
+"===============================================================================
 "function! DoRemote(arg)
 "  UpdateRemotePlugins
 "endfunction
@@ -51,6 +47,10 @@ Plug 'fatih/vim-go'
 " Pug (Jade) development
 Plug 'digitaltoad/vim-pug'
 call plug#end()
+
+"===============================================================================
+" === Configurations ===
+"===============================================================================
 
 ""------------------------------------------------------------
 "" Basic configurations
@@ -181,92 +181,6 @@ set listchars=tab:›\ ,trail:•,nbsp:+   "List mode configuration
 set cursorline " Highlight current line
 
 ""------------------------------------------------------------
-"" General key maps
-""------------------------------------------------------------
-
-let mapleader = ',' " map leader to ,
-
-set pastetoggle=<F10> " Toggle paste mode with f10
-
-" Clear search highlight
-nmap <silent> <leader>/ :nohlsearch<CR>
-
-nmap <silent> <leader>W :call StripTrailingWhitespace()<CR>
-
-nmap <silent> <leader>F :call UpdateFvim()<CR>
-
-nmap <silent> <leader>= :OnlineThesaurusCurrentWord<CR>
-
-" Change between windows
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" New vertical window
-nmap <F2> :vnew<CR>:e
-
-" New horizontal window
-nmap <F3> :new<CR>:e
-
-" Parcourir les windows
-nmap <Space> <C-W>w
-
-" New tab
-nmap <F6> :tabe<CR>:e
-
-" Previous tab
-nmap <silent> <F7> :tabp<CR>
-
-" Next tab
-nmap <silent> <F8> :tabn<CR>
-
-""------------------------------------------------------------
-"" Command key maps
-""------------------------------------------------------------
-
-" Fix writing :Wq or :WQ to save and exit
-command WQ wq
-command Wq wq
-
-""------------------------------------------------------------
-"" Functions
-""------------------------------------------------------------
-
-"" Clear trailing whitespaces from spf13
-function! StripTrailingWhitespace()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " do the business:
-  %s/\s\+$//e
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-
-"" Update fivm
-function! UpdateFvim()
-  PlugUpdate
-  sleep 1
-  PlugClean!
-  sleep 1
-  bd
-endfunction
-
-" Blink the matching line
-nnoremap <silent> n n:call HLNext(0.4)<cr>
-nnoremap <silent> N N:call HLNext(0.4)<cr>
-function! HLNext (blinktime)
-	set invcursorline
-	redraw
-	exec 'sleep ' . float2nr(a:blinktime * 500) . 'm'
-	set invcursorline
-	redraw
-endfunction
-
-""------------------------------------------------------------
 "" Language specific: VHDL
 ""------------------------------------------------------------
 autocmd FileType vhd setlocal shiftwidth=4 tabstop=4 noexpandtab
@@ -332,36 +246,95 @@ autocmd FileType python setlocal
       \ fileformat=unix
 
 "===============================================================================
-" ==== Maps ===
-"
+" === Functions ===
+"===============================================================================
+
+"" Clear trailing whitespaces from spf13
+function! StripTrailingWhitespace()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " do the business:
+  %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+"" Update fivm
+function! UpdateFvim()
+  PlugUpdate
+  sleep 1
+  PlugClean!
+  sleep 1
+  bd
+endfunction
+
+" Blink the matching line
+nnoremap <silent> n n:call HLNext(0.4)<cr>
+nnoremap <silent> N N:call HLNext(0.4)<cr>
+function! HLNext (blinktime)
+	set invcursorline
+	redraw
+	exec 'sleep ' . float2nr(a:blinktime * 500) . 'm'
+	set invcursorline
+	redraw
+endfunction
+
+"===============================================================================
+" === Maps ===
+"===============================================================================
+
+""------------------------------------------------------------
+"" General key maps
+""------------------------------------------------------------
+
+let mapleader = ',' " map leader to ,
+
+set pastetoggle=<F10> " Toggle paste mode with f10
+
+" Clear search highlight
+nmap <silent> <leader>/ :nohlsearch<CR>
+
+nmap <silent> <leader>W :call StripTrailingWhitespace()<CR>
+
+nmap <silent> <leader>F :call UpdateFvim()<CR>
+
+nmap <silent> <leader>= :OnlineThesaurusCurrentWord<CR>
+
+" Change between windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" New vertical window
+nmap <F2> :vnew<CR>:e
+
+" New horizontal window
+nmap <F3> :new<CR>:e
+
+" Parcourir les windows
+nmap <Space> <C-W>w
+
+" New tab
+nmap <F6> :tabe<CR>:e
+
+" Previous tab
+nmap <silent> <F7> :tabp<CR>
+
+" Next tab
+nmap <silent> <F8> :tabn<CR>
+
 " Make witwith f9
 map <f9> :make<CR>
-
-" Disable arrow keys
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 
 " Select text pasted
 nnoremap <leader>v V`]
 
 " Search the visual selection
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
-
-" Highlight these by default in Go
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-
-" Best guess jump for YCM
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " Save file
 nnoremap <Leader>w :w<CR>
@@ -383,12 +356,34 @@ command Bd bp\|bd \#
 " Exit terminal with esc
 tnoremap <Esc> <C-\><C-n>
 
+""------------------------------------------------------------
+"" Command key maps
+""------------------------------------------------------------
+
+" Fix writing :Wq or :WQ to save and exit
+command WQ wq
+command Wq wq
+
+""------------------------------------------------------------
+"" Disabled key maps
+""------------------------------------------------------------
+" Disable arrow keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
 "===============================================================================
 " === Plugins ===
+"===============================================================================
 
-"-------------------------------------------------------------------------------
-" Neomake
-" run when a file is saved
+""------------------------------------------------------------
+"" Plugin - Neomake
+""------------------------------------------------------------
 autocmd! BufWritePost * Neomake
 
 ""------------------------------------------------------------
@@ -402,15 +397,32 @@ endif
 nmap <C-P> :Ack
 
 ""------------------------------------------------------------
+"" Plugin - vim-go
+""------------------------------------------------------------
+" Highlight these by default in Go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+
+""------------------------------------------------------------
+"" Plugin - YouCompleteMe
+""------------------------------------------------------------
+" Best guess jump for YCM
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+
+""------------------------------------------------------------
 "" Plugin - FZF
 ""------------------------------------------------------------
 nmap ; :Buffers<CR>
 nmap <Leader>t :Files<CR>
 nmap <Leader>r :Tags<CR>
-" https://statico.github.io/vim3.html
 
 "===============================================================================
 " === Sources ===
+"===============================================================================
 
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 " http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+" https://statico.github.io/vim3.html
