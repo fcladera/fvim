@@ -12,7 +12,9 @@ Plug 'mhinz/vim-signify'
 " Git vim wrapper
 Plug 'tpope/vim-fugitive'
 Plug 'easymotion/vim-easymotion'
-Plug 'flazz/vim-colorschemes'
+" Template
+Plug 'mhartington/oceanic-next'
+"
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-repeat'
 Plug 'neomake/neomake'
@@ -161,10 +163,15 @@ command! MakeTags !ctags -R .
 "" Appareance
 ""------------------------------------------------------------
 
-set t_Co=256 " Enable 256 colors in vim
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
-set background=dark
-colorscheme jellybeans " colorschemes in .vim/bundle/vim-colorscheme
+" let ayucolor="dark"
+" let g:gruvbox_contrast_dark = 'hard'
+colorscheme OceanicNext
 
 set list " List mode: shows spaces, tabs and nbsp in text with special characters
 set listchars=tab:›\ ,trail:•,nbsp:+   "List mode configuration
