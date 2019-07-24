@@ -25,20 +25,11 @@ Plug 'rhysd/vim-grammarous'
 " Better use of Vim with tex files
 Plug 'lervag/vimtex'
 Plug 'vim-scripts/loremipsum'
-" Use vim in browser, useful for sharelatex
-Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 " An awesome fuzzy finder
 Plug '/usr/share/fzf'
 Plug 'junegunn/fzf.vim'
 " Asynchronous linting
 Plug 'w0rp/ale'
-"Stuff for snippets
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'garbas/vim-snipmate'
-"Plug 'honza/vim-snippets'
-"Stuff for tab completion
-"Plug 'ervandew/supertab'
 "Stuff for autocompletion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -46,6 +37,8 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'fatih/vim-go'
 " Pug (Jade) development
 Plug 'digitaltoad/vim-pug'
+" Awesome snippet completion
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 "===============================================================================
@@ -141,10 +134,8 @@ set linebreak
 
 " Indent behaviour
 
-" Tabs are 4 spaces but don't expand tabs
+" Default tabs are 4 spaces but don't expand tabs
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab " Web programming
-" set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
-" set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab " Linux kernel
 
 " Hide buffer instead of closing it. Avoid to save the file when :e is called
 set hidden
@@ -418,6 +409,14 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 nmap ; :Buffers<CR>
 nmap <Leader>t :Files<CR>
 nmap <Leader>r :Tags<CR>
+""------------------------------------------------------------
+"" Plugin - ultisnips
+""------------------------------------------------------------
+" " UltiSnips triggering
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 "===============================================================================
 " === Sources ===
@@ -426,3 +425,4 @@ nmap <Leader>r :Tags<CR>
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 " http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 " https://statico.github.io/vim3.html
+" https://castel.dev/post/lecture-notes-1/
