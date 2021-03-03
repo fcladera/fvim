@@ -232,13 +232,17 @@ autocmd FileType make setlocal shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType mail setlocal formatoptions+=w
 
 ""------------------------------------------------------------
+"" Language specific: ros launch files
+""------------------------------------------------------------
+autocmd BufRead,BufNewFile *.launch setfiletype xml
+
+""------------------------------------------------------------
 "" Language specific: python
 ""------------------------------------------------------------
 autocmd FileType python setlocal
       \ tabstop=4
       \ softtabstop=4
       \ shiftwidth=4
-      \ textwidth=79
       \ expandtab
       \ autoindent
       \ fileformat=unix
