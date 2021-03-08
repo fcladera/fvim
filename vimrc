@@ -351,6 +351,9 @@ nmap <silent> <F7> :tabp<CR>
 " Next tab
 nmap <silent> <F8> :tabn<CR>
 
+" Next buffer
+nmap <silent> <C-Space> :bn<CR>
+
 " Make witwith f9
 map <f9> :make<CR>
 
@@ -387,6 +390,7 @@ tnoremap <Esc> <C-\><C-n>
 " Fix writing :Wq or :WQ to save and exit
 command WQ wq
 command Wq wq
+command W w
 
 ""------------------------------------------------------------
 "" Disabled key maps
