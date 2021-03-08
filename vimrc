@@ -1,46 +1,49 @@
 "===============================================================================
 " === Plugins ===
 "===============================================================================
-"function! DoRemote(arg)
-"  UpdateRemotePlugins
-"endfunction
+" We use vim-plug for plugin management
+" https://github.com/junegunn/vim-plug
 
 call plug#begin()
+" Template
+Plug 'ayu-theme/ayu-vim'
+" Better surround capabilities. Vim repeat allows to repeat these with .
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 " Show Git modifications in vim
 Plug 'mhinz/vim-signify'
-" Git vim wrapper
-Plug 'tpope/vim-fugitive'
+" Ultra-fast motion in vim
 Plug 'easymotion/vim-easymotion'
-" Template
-Plug 'mhartington/oceanic-next'
-"
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-repeat'
+" An awesome fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Make from vim
 Plug 'neomake/neomake'
-Plug 'beloglazov/vim-online-thesaurus'
+" Asynchronous linting and fixing
+Plug 'w0rp/ale'
+" Autocompletion
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+" Snippet completion
+Plug 'SirVer/ultisnips'
+" Programming language specific
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
-Plug 'reedes/vim-wordy'
 Plug 'vivien/vim-linux-coding-style'
-Plug 'rhysd/vim-grammarous'
-" Better use of Vim with tex files
+Plug 'fatih/vim-go'
+Plug 'digitaltoad/vim-pug' " Jade
+Plug 'vhda/verilog_systemverilog.vim'
+" Writing tools
+Plug 'https://github.com/dpelle/vim-LanguageTool'
 Plug 'lervag/vimtex'
 Plug 'vim-scripts/loremipsum'
-" An awesome fuzzy finder
-Plug '/usr/share/fzf'
-Plug 'junegunn/fzf.vim'
-" Asynchronous linting
-Plug 'w0rp/ale'
-"Stuff for autocompletion
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-" Go development
-Plug 'fatih/vim-go'
-" Pug (Jade) development
-Plug 'digitaltoad/vim-pug'
-" Awesome snippet completion
-Plug 'SirVer/ultisnips'
+Plug 'beloglazov/vim-online-thesaurus'
+Plug 'reedes/vim-wordy'
 call plug#end()
 
 "===============================================================================
@@ -388,15 +391,6 @@ inoremap <right> <nop>
 ""------------------------------------------------------------
 autocmd! BufWritePost * Neomake
 
-""------------------------------------------------------------
-"" Plugin - Ack.vim
-""------------------------------------------------------------
-
-" Use ag instead of ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-nmap <C-P> :Ack
 
 ""------------------------------------------------------------
 "" Plugin - vim-go
@@ -409,17 +403,54 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 
 ""------------------------------------------------------------
-"" Plugin - YouCompleteMe
+"" Plugin - Deoplete
 ""------------------------------------------------------------
-" Best guess jump for YCM
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
+let g:deoplete#enable_at_startup = 1
 
 ""------------------------------------------------------------
 "" Plugin - FZF
 ""------------------------------------------------------------
-nmap ; :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>r :Tags<CR>
+nmap <leader><space> :Buffers<CR>
+nmap <Leader>r :Files<CR>
+nmap <Leader>t :Tags<CR>
+" make FZF respect gitignore if 'rg' is installed
+if (executable('rg'))
+  let $FZF_DEFAULT_COMMAND = 'rg --hidden --ignore-file .git '
+endif
+
+""------------------------------------------------------------
+"" Plugin - ale
+""------------------------------------------------------------
+" lint after 1000ms after changes are made both on insert mode and normal mode
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_delay = 1000
+let g:ale_fixers = {'python': ['autopep8', 'black', 'isort'], 'cpp': ['clang-format']}
+let g:ale_linters = {'cpp': ['cpplint']}
+let g:ale_warn_about_trailing_whitespace = 1
+let g:ale_python_flake8_options = '-m flake8 --max-line-length=88'
+let g:ale_c_clangformat_options ='--style=Google'
+let g:ale_fix_on_save = 1
+nmap <silent> <leader>l :ALEFix<CR>
+
+" use nice symbols for errors and warnings
+" let g:ale_sign_error = '✗\ '
+" let g:ale_sign_warning = '⚠\ '
+
+""------------------------------------------------------------
+"" Plugin - vimtex
+""------------------------------------------------------------
+let g:tex_flavor='latex'
+let g:vimtex_view_method = "zathura"
+let g:vimtex_quickfix_mode=0
+" set conceallevel=1
+let g:tex_conceal='abdmg'
+
+""------------------------------------------------------------
+"" Plugin - LanguageTool
+""------------------------------------------------------------
+let g:languagetool_jar="~/.local/share/LanguageTool/LanguageTool-5.2/languagetool-commandline.jar"
+nmap <silent> <leader>c :LanguageToolCheck<CR>
+
 ""------------------------------------------------------------
 "" Plugin - ultisnips
 ""------------------------------------------------------------
