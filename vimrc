@@ -10,8 +10,9 @@ Plug 'ayu-theme/ayu-vim'
 " Better surround capabilities. Vim repeat allows to repeat these with .
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-" Show Git modifications in vim
+" Git-related plugins
 Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
 " Ultra-fast motion in vim
 Plug 'easymotion/vim-easymotion'
 " An awesome fuzzy finder
