@@ -134,7 +134,7 @@ set relativenumber
 
 " Static word wrap
 "set formatoptions+=cqt
-set textwidth=72
+set textwidth=80
 set linebreak
 
 " Indent behaviour
@@ -172,14 +172,24 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" let ayucolor="dark"
-" let g:gruvbox_contrast_dark = 'hard'
-colorscheme OceanicNext
+set background=dark
+let ayucolor="dark"
+colorscheme ayu
+
 
 set list " List mode: shows spaces, tabs and nbsp in text with special characters
 set listchars=tab:›\ ,trail:•,nbsp:+   "List mode configuration
 
 set cursorline " Highlight current line
+
+"------------------------------------------------------------
+" Language specific: C
+"------------------------------------------------------------
+" Force that all .c and .h files are C (and not cpp)
+augroup project
+  autocmd!
+  autocmd BufRead,BufNewFile *.h,*.c set filetype=c
+augroup END
 
 ""------------------------------------------------------------
 "" Language specific: VHDL
@@ -202,6 +212,11 @@ autocmd FileType pug setlocal shiftwidth=2 tabstop=2 expandtab
 "" Language specific: JSON
 ""------------------------------------------------------------
 autocmd FileType json setlocal shiftwidth=4 tabstop=4 expandtab
+
+""------------------------------------------------------------
+"" Language specific: C++
+""------------------------------------------------------------
+autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2
 
 ""------------------------------------------------------------
 "" Language specific: SHELL SCRIPT
@@ -242,7 +257,10 @@ autocmd BufRead,BufNewFile *.launch setfiletype xml
 ""------------------------------------------------------------
 "" Language specific: python
 ""------------------------------------------------------------
+" For python, extend the column limit to 88 chars to be compliant with the
+" linter
 autocmd FileType python setlocal
+      \ textwidth=88
       \ tabstop=4
       \ softtabstop=4
       \ shiftwidth=4
