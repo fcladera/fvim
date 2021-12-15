@@ -35,7 +35,7 @@ Plug 'SirVer/ultisnips'
 " Programming language specific
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
-Plug 'vivien/vim-linux-coding-style'
+"Plug 'vivien/vim-linux-coding-style'
 Plug 'fatih/vim-go'
 Plug 'digitaltoad/vim-pug' " Jade
 Plug 'vhda/verilog_systemverilog.vim'
@@ -249,11 +249,23 @@ autocmd FileType make setlocal shiftwidth=4 tabstop=4 noexpandtab
 "" Language specific: email
 ""------------------------------------------------------------
 autocmd FileType mail setlocal formatoptions+=w
+set nolinebreak
 
 ""------------------------------------------------------------
 "" Language specific: ros launch files
 ""------------------------------------------------------------
 autocmd BufRead,BufNewFile *.launch setfiletype xml
+
+""------------------------------------------------------------
+"" Language specific: ros launch files
+""------------------------------------------------------------
+autocmd BufRead,BufNewFile *.launch setfiletype xml
+" Force that all .v files are verilog
+augroup project
+  autocmd!
+  autocmd BufRead,BufNewFile *.v set filetype=verilog
+  set autoindent
+augroup END
 
 ""------------------------------------------------------------
 "" Language specific: python
@@ -429,17 +441,15 @@ let g:go_highlight_operators = 1
 "" Plugin - Deoplete
 ""------------------------------------------------------------
 let g:deoplete#enable_at_startup = 1
+" Close preview window once that insert mode is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 
 ""------------------------------------------------------------
 "" Plugin - FZF
 ""------------------------------------------------------------
-nmap <leader><space> :Buffers<CR>
-nmap <Leader>r :Files<CR>
+nmap <leader>b :Buffers<CR>
+nmap <Leader>f :Files<CR>
 nmap <Leader>t :Tags<CR>
-" make FZF respect gitignore if 'rg' is installed
-if (executable('rg'))
-  let $FZF_DEFAULT_COMMAND = 'rg --hidden --ignore-file .git '
-endif
 
 ""------------------------------------------------------------
 "" Plugin - ale
@@ -447,13 +457,14 @@ endif
 " lint after 1000ms after changes are made both on insert mode and normal mode
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_delay = 1000
-let g:ale_fixers = {'python': ['autopep8', 'black', 'isort'], 'cpp': ['clang-format']}
+" let g:ale_fixers = {'python': ['autopep8', 'black', 'isort'], 'cpp': ['clang-format']}
+let g:ale_fixers = {'python': ['autopep8', 'black', 'isort']}
 let g:ale_linters = {'cpp': ['cpplint']}
 let g:ale_warn_about_trailing_whitespace = 1
 let g:ale_python_flake8_options = '-m flake8 --max-line-length=88'
 let g:ale_c_clangformat_options ='--style=Google'
-let g:ale_fix_on_save = 1
-nmap <silent> <leader>l :ALEFix<CR>
+let g:ale_fix_on_save = 0
+nmap <leader>l :ALEFix<CR>
 
 " use nice symbols for errors and warnings
 " let g:ale_sign_error = '✗\ '
