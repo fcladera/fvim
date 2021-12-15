@@ -1,0 +1,6 @@
+require('plug')
+require('basic')
+require('template')
+require('langSpecific')
+require('functions')
+require('keymaps')

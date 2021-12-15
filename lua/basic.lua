@@ -2,15 +2,20 @@
 -- Basic configurations
 ----------------------------------------
 
+-- Filetype detection and language-dependent indenting
+-- FIXME: do not use vimscript syntax
 if vim.fn.has('autocmd') then
-  -- FIXME
-  --   filetype plugin indent on "File type detection and language-dependent indenting
+  vim.cmd [[
+    filetype plugin indent on
+  ]]
 end
 
+-- Switches on syntax highlighting
+-- FIXME: do not use vimscript syntax
 if vim.fn.has('syntax') then
-  -- FIXME
-  -- vim.o.syntax = true
-  --   syntax enable "Switches on syntax highlighting
+  vim.cmd [[
+    syntax enable
+  ]]
 end
 
 -- Prefer Unix based file format, only LF at end line
