@@ -1,47 +1,21 @@
 # fvim
 
-This is my vim distribution. It is inspired in [janus](https://github.com/carlhuda/janus),
-[spf13-vim](https://github.com/spf13/spf13-vim) and [tpope's dotfiles](https://github.com/tpope/tpope).
-However, I try to keep things simple and focus on speed.
-
-A piece of advice: write your **own** .vimrc file. Fork this repository
-and tune it, it provides a good starting point!
-
-**This distribution is not intended to work in Windows!**
+A blazing fast vim configuration targeted towards nvim.
 
 ## Install
 
-1. Backup your existing vim and neovim configuration files (if wanted) and remove
-   your old .vim folder.
+0. Delete your current config
+    ```
+    mv ~/.config/nvim ~/.config/bkp.nvim
+    ```
+    
+1. Clone this repo into the Neovim config folder
 
     ```
-    rm -rf ~/.vim
+    git clone --recursive https://github.com/fcladera/fvim.git ~/.config/nvim
     ```
-2. Clone this repo (or your fork) into the .vim folder.
-
-    ```
-    git clone --recursive https://github.com/fcladera/fvim.git ~/.vim
-    ```
-
-3. Execute the install script.
-
-    ```
-    ~/.vim/setup.sh
-    ```
-4. Execute ```vim``` and update plugins inside **vim**.
+4. Install all the stuff. Run this inside vim
 
     ```
     :PlugInstall
     ```
-
-## Update
-
-## Plugins
-
-## Mappings
-
-Leader key is mapped to ```,```
-
-Pastetoggle is maped to ```<F10>```
-
-Clear trailing whitespaces with ```<leader>W```
