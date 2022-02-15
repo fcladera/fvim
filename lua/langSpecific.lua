@@ -1,3 +1,4 @@
+-- Autocmds have not been implemented yet in neovim. We do it the old way insted
 vim.cmd [[
 "------------------------------------------------------------
 " Language specific: C
@@ -7,6 +8,7 @@ augroup project
   autocmd!
   autocmd BufRead,BufNewFile *.h,*.c set filetype=c
 augroup END
+autocmd FileType c setlocal shiftwidth=4 tabstop=4 noexpandtab
 
 ""------------------------------------------------------------
 "" Language specific: VHDL
