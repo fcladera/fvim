@@ -14,8 +14,8 @@ A blazing fast vim configuration targeted towards nvim.
     ```
     git clone --recursive https://github.com/fcladera/fvim.git ~/.config/nvim
     ```
-4. Install all the stuff. Run this inside vim
+2. Install it
 
     ```
-    :PlugInstall
+    bash ~/.config/nvim/setup.sh
     ```
