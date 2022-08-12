@@ -1,117 +1,65 @@
-vim.cmd [[
+----------------------------------------
+-- Keymaps
+----------------------------------------
+vim.g.mapleader = ","                                      -- Map leader to ,
+vim.g.maplocalleader = ","                                 -- as well as localleader
 
+local opts = { noremap = true, silent = true}
+local keymap = vim.api.nvim_set_keymap
 
-"===============================================================================
-" === Maps ===
-"===============================================================================
+keymap("n", "<up>   ",  "<nop>", opts)                           -- Disable arrow keys
+keymap("n", "<down> ",  "<nop>", opts)
+keymap("n", "<left> ",  "<nop>", opts)
+keymap("n", "<right>",  "<nop>", opts)
+keymap("n", "<up>   ",  "<nop>", opts)
+keymap("n", "<down> ",  "<nop>", opts)
+keymap("n", "<left> ",  "<nop>", opts)
+keymap("n", "<right>",  "<nop>", opts)
 
-""------------------------------------------------------------
-"" General key maps
-""------------------------------------------------------------
+keymap("n", "<C-h>", "<C-w>h", opts)                       -- Navigate in windows
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
 
-let mapleader = ',' " map leader to ,
+keymap("n", "<C-Up>", ":resize +2<CR>", opts)              -- Resize windows
+keymap("n", "<C-Down>", ":resize -2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
-set pastetoggle=<F10> " Toggle paste mode with f10
+keymap("n", "<S-l>", ":bnext<CR>", opts)                   -- Change buffers
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
-" Clear search highlight
-nmap <silent> <leader>/ :nohlsearch<CR>
+----------------------------------------
+-- Shortcuts
+----------------------------------------
+keymap("n", "<leader>/", ":nohlsearch<CR>", opts)
+keymap("n", "<leader>W", ":call StripTrailingWhitespace()<CR>", opts)
+keymap("n", "<leader>F", ":call UpdateFvim()<CR>", opts)
+keymap("n", "<leader>=", ":OnlineThesaurusCurrentWord<CR>", opts)
+keymap("n", "<leader>s", ":set spell<CR>", opts)
 
-nmap <silent> <leader>W :call StripTrailingWhitespace()<CR>
+-- Telescope shortcuts
+keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
+keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts)
+keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
 
-nmap <silent> <leader>F :call UpdateFvim()<CR>
+-- Other keymaps?
+keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
-nmap <silent> <leader>= :OnlineThesaurusCurrentWord<CR>
+----------------------------------------
+-- Commands
+----------------------------------------
+keymap("c", "WQ", "wq", {})  -- Avoid stupidity
+keymap("c", "Wq", "wq", {})
+keymap("c", "W", "w", {})
 
-" Change between windows
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" New vertical window
-nmap <F2> :vnew<CR>:e
-
-" New horizontal window
-nmap <F3> :new<CR>:e
-
-" Parcourir les windows
-nmap <Space> <C-W>w
-
-" New tab
-nmap <F6> :tabe<CR>:e
-
-" Previous tab
-nmap <silent> <F7> :tabp<CR>
-
-" Next tab
-nmap <silent> <F8> :tabn<CR>
-
-" Next buffer
-nmap <silent> <C-Space> :bn<CR>
-
-" Make witwith f9
-map <f9> :make<CR>
-
-" Select text pasted
-nnoremap <leader>v V`]
-
-" Search the visual selection
-vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
-
-" Save file
-nnoremap <Leader>w :w<CR>
-
-" Copy and paste from system clipboard
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
-
-" Activate spell check with ,s
-map <leader>s :set spell<CR>
-
-" Delete file in current buffer but do not close tab or view
-command Bd bp\|bd \#
-
-" Exit terminal with esc
-tnoremap <Esc> <C-\><C-n>
-
-""------------------------------------------------------------
-"" Command key maps
-""------------------------------------------------------------
-
-" Fix writing :Wq or :WQ to save and exit
-command WQ wq
-command Wq wq
-command W w
-
-""------------------------------------------------------------
-"" Disabled key maps
-""------------------------------------------------------------
-" Disable arrow keys
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-
-"" Telescope configuration
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-]]
-
-local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+----------------------------------------
+-- Telescope configs, move
+----------------------------------------
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
