@@ -1,4 +1,4 @@
-require('fclad.plug')
+require('fclad.plugins')
 require('fclad.basic')
 require('fclad.template')
 require('fclad.langSpecific')
