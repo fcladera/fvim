@@ -66,7 +66,7 @@ autocmd FileType make setlocal shiftwidth=4 tabstop=4 noexpandtab
 ""------------------------------------------------------------
 "" Language specific: email
 ""------------------------------------------------------------
-autocmd FileType mail setlocal formatoptions+=w
+autocmd FileType mail setlocal formatoptions+=aw
 set nolinebreak
 
 ""------------------------------------------------------------
