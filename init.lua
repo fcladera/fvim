@@ -1,5 +1,4 @@
 --require('fclad.plugins')
---require('fclad.basic')
 --require('fclad.template')
 --require('fclad.langSpecific')
 --require('fclad.functions')
