@@ -1,9 +1,6 @@
---require('fclad.plugins')
---require('fclad.langSpecific')
---require('fclad.lsp')
 require "user.impatient"
 require "user.options"
-require('fclad.functions')
+require "user.userFunctions"
 require "user.keymaps"
 require "user.plugins"
 require "user.autocommands"
@@ -21,6 +18,5 @@ require "user.toggleterm"
 require "user.project"
 require "user.illuminate"
 require "user.indentline"
-require "user.alpha"
 require "user.lsp"
 require "user.dap"
