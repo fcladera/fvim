@@ -5,7 +5,8 @@ local opts = { silent = true }
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
+vim.g.mapleader = ","                                      -- Map leader to ,
+vim.g.maplocalleader = ","                                 -- as well as localleader
 
 -- Modes
 --   normal_mode = "n",
@@ -14,6 +15,16 @@ vim.g.mapleader = " "
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+
+-- Disable arrow keys
+keymap("n", "<up>   ",  "<nop>", opts)
+keymap("n", "<down> ",  "<nop>", opts)
+keymap("n", "<left> ",  "<nop>", opts)
+keymap("n", "<right>",  "<nop>", opts)
+keymap("n", "<up>   ",  "<nop>", opts)
+keymap("n", "<down> ",  "<nop>", opts)
+keymap("n", "<left> ",  "<nop>", opts)
+keymap("n", "<right>",  "<nop>", opts)
 
 -- Normal --
 -- Better window navigation
@@ -33,13 +44,22 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
+keymap("n", "<leader>/", "<cmd>nohlsearch<CR>", opts)
 
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)
+
+-- Strip white spaces in the file
+keymap("n", "<leader>W", ":call StripTrailingWhitespace()<CR>", opts)
+
+-- Command --
+-- Avoid stupidity while trying to close the file
+keymap("c", "WQ", "wq", {})
+keymap("c", "Wq", "wq", {})
+keymap("c", "W", "w", {})
 
 -- Insert --
 -- Press jk fast to enter

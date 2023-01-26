@@ -1,11 +1,9 @@
 --require('fclad.plugins')
---require('fclad.template')
 --require('fclad.langSpecific')
---require('fclad.functions')
---require('fclad.keymaps')
 --require('fclad.lsp')
 require "user.impatient"
 require "user.options"
+require('fclad.functions')
 require "user.keymaps"
 require "user.plugins"
 require "user.autocommands"
