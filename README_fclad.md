@@ -1,21 +1,14 @@
 # fvim
 
-A blazing fast vim configuration targeted towards nvim.
+A blazing fast vim configuration targeted towards Neovim. Since Dec 2022, I
+decided to switch to [nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide) 
+as the source for my configuration.  This configuration is light enough, with
+sane defaults, and easy to extend. Moreover, it tracks upstream changes in
+Neovim quite well.
 
-## Install
+The Neovim plugin ecosystem has became complex enough that it is worth to leverage
+the work of the community for your own config!
 
-0. Delete your current config
-    ```
-    mv ~/.config/nvim ~/.config/bkp.nvim
-    ```
-    
-1. Clone this repo into the Neovim config folder
+## License
 
-    ```
-    git clone --recursive https://github.com/fcladera/fvim.git ~/.config/nvim
-    ```
-2. Install it
-
-    ```
-    bash ~/.config/nvim/setup.sh
-    ```
+As the original distribution, this code is released under GNU GPL v3.
